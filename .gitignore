@@ -1,5 +1,6 @@
-.gradle
-build
+/.gradle/
+/build/
+/classes/
 jars
 out
 *.iml
