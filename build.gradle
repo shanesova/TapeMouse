@@ -16,7 +16,9 @@ buildscript {
     }
 }
 
-import groovy.json.*
+import groovy.json.JsonBuilder
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
 
 configurations {
     compile
@@ -31,14 +33,14 @@ group = "net.dries007.tapemouse"
 version = "1.1.2"
 def githuborg = 'dries007'
 
-targetCompatibility = 1.7
-sourceCompatibility = 1.7
+targetCompatibility = 1.8
+sourceCompatibility = 1.8
 
 archivesBaseName = 'TapeMouse'
 minecraft {
-    version = "1.11-13.19.1.2189"
+    version = "1.10.2-12.18.3.2185"
     runDir = "jars"
-    mappings = "snapshot_20161111"
+    mappings = "stable_29"
 }
 if (System.getenv().BUILD_NUMBER != null) version += "." + System.getenv().BUILD_NUMBER
 
@@ -46,16 +48,15 @@ if (System.getenv().BUILD_NUMBER != null) version += "." + System.getenv().BUILD
 processResources {
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version, 'modid':project.archivesBaseName, 'githuborg':githuborg, 'description':description, 'group':project.group, 'artifactId':project.archivesBaseName
+        expand 'version': project.version, 'mcversion': project.minecraft.version, 'modid': project.archivesBaseName, 'githuborg': githuborg, 'description': description, 'group': project.group, 'artifactId': project.archivesBaseName
     }
 
     doLast {
         def updateFile = new File(project.archivesBaseName + '.json')
-        def json;
+        def json
         if (updateFile.exists()) {
             json = new JsonSlurper().parseText(updateFile.getText())
-        }
-        else {
+        } else {
             def builder = new JsonBuilder()
             json = builder(
                     homepage: "http://doubledoordev.net/",
@@ -65,7 +66,7 @@ processResources {
         def outStream = new ByteArrayOutputStream()
         def result = exec {
             executable = 'git'
-            args = [ 'log', '-n', '1', "--format='%B'"]
+            args = ['log', '-n', '1', "--format='%B'"]
             standardOutput = outStream
         }
         def fullLog = outStream.toString().replaceAll("^\\s*'\\s*|\\s*'\\s*\$", "").replaceAll("[\\r\\n]+", "\n")
