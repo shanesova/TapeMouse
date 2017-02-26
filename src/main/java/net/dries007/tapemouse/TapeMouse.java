@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
  * @author Dries007
  */
 @SuppressWarnings({"NewExpressionSideOnly", "MethodCallSideOnly"}) // clientSideOnly does about the same thing...
-@Mod(modid = TapeMouse.MODID, name = TapeMouse.NAME, dependencies = "before:*", useMetadata = false, clientSideOnly = true)
+@Mod(modid = TapeMouse.MODID, name = TapeMouse.NAME, dependencies = "before:*", clientSideOnly = true)
 public class TapeMouse {
     public static final String MODID = "tapemouse";
     public static final String NAME = "TapeMouse";
