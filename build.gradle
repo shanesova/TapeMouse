@@ -72,7 +72,7 @@ processResources {
         def fullLog = outStream.toString().replaceAll("^\\s*'\\s*|\\s*'\\s*\$", "").replaceAll("[\\r\\n]+", "\n")
 
         json['promos'][project.minecraft.version + '-latest'] = project.version
-        json['promos'][project.minecraft.version + '-recomended'] = project.version
+        json['promos'][project.minecraft.version + '-recommended'] = project.version
         if (!json.containsKey(project.minecraft.version)) json.put(project.minecraft.version, new HashMap<>())
         def version = json[project.minecraft.version]
         version.put(project.version, fullLog)
