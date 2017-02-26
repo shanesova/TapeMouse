@@ -113,7 +113,6 @@ public class CommandTapeMouse extends CommandBase {
 
             sender.sendMessage(new TextComponentString(keyBinding.getDisplayName() + " => " + name + " (" + cat + ")"));
         }
-        return;
     }
 
     @Override
