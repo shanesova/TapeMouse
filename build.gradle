@@ -38,7 +38,7 @@ sourceCompatibility = 1.8
 
 archivesBaseName = 'TapeMouse'
 minecraft {
-    version = "1.10.2-12.18.3.2221"
+    version = "1.10.2-12.18.3.2239"
     runDir = "jars"
     mappings = "stable_29"
 }
