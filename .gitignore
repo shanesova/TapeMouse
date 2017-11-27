@@ -1,8 +1,7 @@
-/.gradle/
-/build/
-/classes/
-jars
-out
+.gradle
+build
+run
+classes
 *.iml
 *.ipr
 *.iws

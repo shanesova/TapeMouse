@@ -2,6 +2,7 @@ package net.dries007.tapemouse;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
+import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -17,9 +18,10 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
  *
  * @author Dries007
  */
-@SuppressWarnings({"NewExpressionSideOnly", "MethodCallSideOnly"}) // clientSideOnly does about the same thing...
-@Mod(modid = TapeMouse.MODID, name = TapeMouse.NAME, dependencies = "before:*", clientSideOnly = true)
-public class TapeMouse {
+@SuppressWarnings({"NewExpressionSideOnly", "MethodCallSideOnly"}) // @Mod.clientSideOnly does this.
+@Mod(modid = TapeMouse.MODID, name = TapeMouse.NAME, dependencies = "before:*", useMetadata = false, clientSideOnly = true)
+public class TapeMouse
+{
     public static final String MODID = "tapemouse";
     public static final String NAME = "TapeMouse";
     static int keyUpDelay = 0;
@@ -34,19 +36,29 @@ public class TapeMouse {
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void textRenderEvent(RenderGameOverlayEvent.Text event) {
+    public void textRenderEvent(RenderGameOverlayEvent.Text event)
+    {
         if (keyBinding == null) return;
-        if (Minecraft.getMinecraft().currentScreen instanceof GuiChat) {
-            event.getLeft().add(MODID + " paused. Chat GUI open.");
-        } else {
-            event.getLeft().add(MODID + " active: " + keyBinding.getDisplayName() + " (" + keyBinding.getKeyDescription().replaceFirst("^key\\.", "") + ')');
-            event.getLeft().add("Delay: " + i + " / " + keyUpDelay + " / " + keyDownDelay);
+        if (Minecraft.getMinecraft().currentScreen instanceof GuiMainMenu)
+        {
+            event.getLeft().add(NAME + " paused. Main menu open. If you want to AFK, use ALT+TAB.");
+        }
+        else if (Minecraft.getMinecraft().currentScreen instanceof GuiChat)
+        {
+            event.getLeft().add(NAME + " paused. Chat GUI open. If you want to AFK, use ALT+TAB.");
+        }
+        else
+        {
+            event.getLeft().add(NAME + " active: " + keyBinding.getDisplayName() + " (" + keyBinding.getKeyDescription().replaceFirst("^key\\.", "") + ')');
+            event.getLeft().add("Delay: " + i + " / " + delay);
         }
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void tickEvent(TickEvent.ClientTickEvent event) {
+    public void tickEvent(TickEvent.ClientTickEvent event)
+    {
         if (event.phase != TickEvent.Phase.START) return;
+        if (Minecraft.getMinecraft().currentScreen instanceof GuiMainMenu) return;
         if (Minecraft.getMinecraft().currentScreen instanceof GuiChat) return;
         if (keyBinding == null) return;
 
