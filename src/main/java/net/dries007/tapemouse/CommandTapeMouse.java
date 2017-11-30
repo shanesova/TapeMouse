@@ -18,8 +18,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.lwjgl.input.Keyboard.KEY_NONE;
 
@@ -28,7 +28,7 @@ import static org.lwjgl.input.Keyboard.KEY_NONE;
  */
 @SideOnly(Side.CLIENT)
 public class CommandTapeMouse extends CommandBase {
-    private static final Map<String, KeyBinding> KEYBIND_ARRAY = ReflectionHelper.getPrivateValue(KeyBinding.class, null, "KEYBIND_ARRAY", "field_74516_a");
+    private static final List<KeyBinding> KEYBIND_ARRAY = ReflectionHelper.getPrivateValue(KeyBinding.class, null, "KEYBIND_ARRAY", "field_74516_a");
     private boolean prevPauseSetting = true; // defaults to true
 
     @Override

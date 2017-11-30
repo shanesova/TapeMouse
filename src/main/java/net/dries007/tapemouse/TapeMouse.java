@@ -50,7 +50,7 @@ public class TapeMouse
         else
         {
             event.getLeft().add(NAME + " active: " + keyBinding.getDisplayName() + " (" + keyBinding.getKeyDescription().replaceFirst("^key\\.", "") + ')');
-            event.getLeft().add("Delay: " + i + " / " + delay);
+            event.getLeft().add("Delay: " + i + " / " + keyUpDelay + " / " + keyDownDelay);
         }
     }
 
